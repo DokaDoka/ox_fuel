@@ -66,21 +66,28 @@ lib.onCache('seat', function(seat)
 
 			while cache.seat == -1 do
 				if GetIsVehicleEngineRunning(vehicle) then
-					local usage = Config.rpmUsage[math.floor(GetVehicleCurrentRpm(vehicle) * 10) / 10]
 					local fuel = state.fuel
-					local newFuel = fuel - usage * multiplier
 
-					if newFuel < 0 or newFuel > 100 then
-						newFuel = fuel
-					end
+					if Config.electricModels[GetEntityModel(vehicle)] then
+						if fuel < 100 then
+							setFuel(state, vehicle, 100, true)
+						end
+					else
+						local usage = Config.rpmUsage[math.floor(GetVehicleCurrentRpm(vehicle) * 10) / 10]
+						local newFuel = fuel - usage * multiplier
 
-					if fuel ~= newFuel then
-						if fuelTick == 15 then
-							fuelTick = 0
+						if newFuel < 0 or newFuel > 100 then
+							newFuel = fuel
 						end
 
-						setFuel(state, vehicle, newFuel, fuelTick == 0)
-						fuelTick += 1
+						if fuel ~= newFuel then
+							if fuelTick == 15 then
+								fuelTick = 0
+							end
+
+							setFuel(state, vehicle, newFuel, fuelTick == 0)
+							fuelTick += 1
+						end
 					end
 				end
 
