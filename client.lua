@@ -37,6 +37,7 @@ local function setFuel(state, vehicle, fuel, replicate)
 end
 
 local lastVehicle
+local glm = require 'glm'
 
 lib.onCache('seat', function(seat)
 	if cache.vehicle then
@@ -73,7 +74,7 @@ lib.onCache('seat', function(seat)
 							setFuel(state, vehicle, 100, true)
 						end
 					else
-						local usage = Config.rpmUsage[math.floor(GetVehicleCurrentRpm(vehicle) * 10) / 10]
+						local usage = Config.rpmUsage[glm.snap(GetVehicleCurrentRpm(vehicle), 0.1)]
 						local newFuel = fuel - usage * multiplier
 
 						if newFuel < 0 or newFuel > 100 then
