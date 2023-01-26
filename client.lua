@@ -74,7 +74,7 @@ lib.onCache('seat', function(seat)
 							setFuel(state, vehicle, 100, true)
 						end
 					else
-						local usage = Config.rpmUsage[glm.snap(GetVehicleCurrentRpm(vehicle), 0.1)]
+						local usage = glm.snap(GetVehicleCurrentRpm(vehicle) * 0.12, 0.01)
 						local newFuel = fuel - usage * multiplier
 
 						if newFuel < 0 or newFuel > 100 then

@@ -43,22 +43,7 @@ Config = {
 		[13] = 0.0, -- Cycles
 	},
 
-	-- Fuel usage per second based on vehicle RPM
-	rpmUsage = {
-		[1.0] = 0.14,
-		[0.9] = 0.12,
-		[0.8] = 0.10,
-		[0.7] = 0.09,
-		[0.6] = 0.08,
-		[0.5] = 0.07,
-		[0.4] = 0.05,
-		[0.3] = 0.04,
-		[0.2] = 0.02,
-		[0.1] = 0.01,
-		[0.0] = 0.00,
-	},
-
-	-- Electric vehicles (not currently used)
+	-- Electric vehicles
 	electricModels = {
 		[`airtug`] = true,
 		[`caddy`] = true,
