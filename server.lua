@@ -112,10 +112,10 @@ RegisterNetEvent('ox_fuel:createStatebag', function(netid, fuel)
 	end
 end)
 
-lib.addCommand('group.admin', 'refuel', function(source)
-	local player = exports.ox_core:GetPlayer(source)
+lib.addCommand('refuel', { restricted = 'group.admin'}, function(source)
+    local player = exports.ox_core:GetPlayer(source)
     local vehicle = GetVehiclePedIsIn(player.ped, true)
-	local state = vehicle and Entity(vehicle).state
+    local state = vehicle and Entity(vehicle).state
 
-	state:set('fuel', 100, true)
+    state:set('fuel', 100, true)
 end)
