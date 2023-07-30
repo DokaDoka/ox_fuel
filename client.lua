@@ -72,11 +72,11 @@ lib.onCache('seat', function(seat)
 				local fuel = state.fuel
 				local newFuel = fuel
 
-				if Config.electricModels[GetEntityModel(vehicle)] then
+				if fuel and Config.electricModels[GetEntityModel(vehicle)] then
 					if fuel < 100 then
 						setFuel(state, vehicle, 100, true)
 					end
-				elseif fuel > 0 then
+				elseif fuel and fuel > 0 then
 					if GetIsVehicleEngineRunning(vehicle) then
 						local usage = glm.snap(GetVehicleCurrentRpm(vehicle) * 0.12, 0.01)
 						newFuel -= usage * multiplier
